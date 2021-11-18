@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block site-title %}
+    Blog made by Norbert
+{% endblock site-title %}
+
+{% block nav-title %}Blog main page{% endblock nav-title %}
+
+{% block nav-button %}
+<style>
+    .button{
+        background-color: #1e90ff;
+        border: 2px solid #1e90ff;
+        border-radius: 50px;
+        width: 150px;
+        color: white;
+        text-decoration: none;
+        text-align: center;
+        height: 30px;
+        margin-top: 15px;
+        margin-right: 10px;
+    }
+    .button:hover{
+        background-color: #70a1ff;
+        border-color: #70a1ff;
+    }
+</style>
+    <a class="button" href="{% url 'add' %}"><div style="width: 100px; color: white; text-align: center; margin: 0 auto;">Add new post</div></a>
+{% endblock nav-button %}
+    
+{% block content %}
+    <style>
+        a:hover{
+            color: #57606f
+        }
+        a{
+            color: #2f3542;
+        }
+        li{
+            width: 400px;
+            border: 1px solid black;
+            margin: 0 auto;
+        }
+    </style>
+    <h2>
+
+    </h2>
+    <ul style="list-style: none; width: 100%; text-align: center; margin-top: 30px;">
+        {% for post in latest_blog_post_list %}
+            <li><a style="text-decoration: none;" href="{% url 'blogpost' post.id %}"><h1>{{ post.title_text }}</h1> {{ post.pub_date }}</a></li>
+        {% endfor %}
+    </ul> 
+{% endblock content %}

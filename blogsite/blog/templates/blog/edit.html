@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block site-title %}{{ post.title_text }} - edit{% endblock site-title %}
+
+{% block nav-title %}Blog - {{ post.title_text }}(edit){% endblock nav-title %}
+
+
+{% block content %}
+<style>
+    .container{
+        margin: 0 auto;
+        margin-top: 20px;
+        text-align: center;
+        width: 50%;
+    }
+    #post-description{
+        width: 90%;
+        height: 300px;
+        resize: none;
+        border-radius: 10px;
+        background-color: #dfe6e9;
+    }
+    .button{
+        background-color: #1e90ff;
+        border: 2px solid #1e90ff;
+        border-radius: 50px;
+        width: 100px;
+        color: white;
+    }
+    .button:hover{
+        background-color: #70a1ff;
+        border-color: #70a1ff;
+    }
+</style>
+    <div class="container">
+        <form action="{% url 'changepost' post.id %}" method="post">
+            {% csrf_token %}
+            <fieldset>
+                <legend><h2>Editing {{ post.title_text }}</h2></legend>
+                {% for desc in post.description_set.all %}
+                    <textarea type="text" name="post-description" id="post-description">{{ desc.description_text }}</textarea>
+                {% endfor %}
+            </fieldset>
+            
+            <input class="button" type="submit" value="SAVE">
+        </form>
+    </div>
+{% endblock content %}
+    

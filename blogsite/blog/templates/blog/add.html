@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block site-title %}New Post{% endblock site-title %}
+
+{% block nav-title %}Blog - adding new post{% endblock nav-title %}
+
+
+{% block content %}
+<style>
+    .container{
+        margin: 0 auto;
+        margin-top: 20px;
+        text-align: center;
+        width: 50%;
+    }
+    #post-description{
+        width: 90%;
+        height: 300px;
+        resize: none;
+        border-radius: 10px;
+        background-color: #dfe6e9;
+    }
+    .button{
+        background-color: #1e90ff;
+        border: 2px solid #1e90ff;
+        border-radius: 50px;
+        width: 100px;
+        color: white;
+    }
+    .button:hover{
+        background-color: #70a1ff;
+        border-color: #70a1ff;
+    }
+</style>
+    <div class="container">
+        <form action="{% url 'addpost' %}" method="post">
+            {% csrf_token %}
+            <fieldset>
+                <legend><h2>Adding new post</h2></legend>
+                <input type="text" name="new_title">
+                <textarea type="text" name="post-description" id="post-description">{{ desc.description_text }}</textarea>
+            </fieldset>
+            
+            <input class="button" type="submit" value="ADD">
+        </form>
+    </div>
+{% endblock content %}
+    

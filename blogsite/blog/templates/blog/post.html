@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block site-title %}{{ post.title_text }}{% endblock site-title %}
+
+{% block nav-title %}Blog - {{ post.title_text }}{% endblock nav-title %}
+
+
+{% block content %}
+<style>
+    a{
+        text-decoration: none;
+    }
+    div a{
+        background-color: #1e90ff;
+        border: 2px solid #1e90ff;
+        border-radius: 50px;
+    }
+    div a:hover{
+        background-color: #70a1ff;
+        border-color: #70a1ff;
+    }
+    .button{
+        background-color: #1e90ff;
+        border: 2px solid #1e90ff;
+        border-radius: 50px;
+        width: 100px;
+        color: white;
+    }
+    .button:hover{
+        background-color: #70a1ff;
+        border-color: #70a1ff;
+    }
+
+</style>
+    {% for desc in post.description_set.all %}
+        <div style="width: 50%; margin: 0 auto; text-align: center; margin-top: 20px;">
+            <h2>{{post.pub_date}}</h2>
+            <p style="font-size: 20px;">{{ desc.description_text }}</p> 
+            <div style="display: flex; justify-content: center;">
+                <a href="{% url 'postedit' post.id %}"><div style="width: 100px; color: white;">EDIT</div></a>
+                <form method="post" action="{% url 'deletepost' post.id %}">
+                    {% csrf_token %}
+                    <input style="margin-left: 10px;" class="button" type="submit" value="DELETE">
+                </form>
+            </div>
+        </div>
+    {% endfor %}      
+{% endblock content %}
+    
